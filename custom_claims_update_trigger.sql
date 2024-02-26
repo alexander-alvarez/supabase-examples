@@ -29,3 +29,6 @@ ALTER FUNCTION "public"."trigger_update_company_id_claim"() OWNER TO "postgres";
 CREATE OR REPLACE TRIGGER "set_company_id_user_claims"
 AFTER INSERT OR UPDATE ON "public"."company_users"
 FOR EACH ROW EXECUTE FUNCTION "public"."trigger_update_company_id_claim"();
+
+-- NOTE you will have to trim top level strings in order to coerce back to a UUID
+--TRIM('"' FROM get_my_claim('https://www.nextlevelsalvage.com/company_id')::text)::UUID
